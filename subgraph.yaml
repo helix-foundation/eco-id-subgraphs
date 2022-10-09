@@ -1,0 +1,29 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: EcoClaim
+    network: goerli
+    source:
+      address: "0x219589690F8163a38da35FE082EE442F1Dd90a9d"
+      abi: EcoClaim
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Claim
+        - OwnershipTransferred
+        - ReleaseVesting
+      abis:
+        - name: EcoClaim
+          file: ./abis/EcoClaim.json
+      eventHandlers:
+        - event: Claim(indexed string,indexed address,uint256,uint256)
+          handler: handleClaim
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ReleaseVesting(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleReleaseVesting
+      file: ./src/mapping.ts
