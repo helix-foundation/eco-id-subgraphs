@@ -3,6 +3,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
+    "network": "node scripts/setupNetwork.js :",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ paged1/claim",
     "create-local": "graph create --node http://localhost:8020/ paged1/claim",
@@ -10,7 +11,8 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 paged1/claim"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.29.1",
-    "@graphprotocol/graph-ts": "0.26.0"
+    "@graphprotocol/graph-cli": "^0.34.0",
+    "@graphprotocol/graph-ts": "^0.28.0",
+    "yaml": "^2.1.3"
   }
 }

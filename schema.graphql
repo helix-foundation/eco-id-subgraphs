@@ -1,6 +1,83 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  socialID: String! # string
-  addr: Bytes! # address
+
+type Globals @entity {
+    id: String!
+    ecoNFT: NFTContract!
+    ecoClaim: ClaimContract!
+    eco: Bytes!
+    ecox: Bytes!
+}
+
+
+type NFTContract @entity {
+    id: String! # address
+    NFT_IMAGE_URL: String!
+    META_LIMIT: BigInt!
+    EXTERNAL_IMAGE_URL: String!
+    name: String!
+    symbol: String!
+    nfts: [NFT!]! @derivedFrom(field: "nftContract")
+    globals: Globals! @derivedFrom(field: "ecoNFT")
+}
+
+type NFT @entity {
+  id: String!
+  recipient: Bytes! # address
+  claim: VerifiedClaim! # string
+  tokenID: BigInt! # uint256
+  tokenURI: String!
+  nftContract: NFTContract!
+}
+
+type VerifiedClaim @entity {
+  id: String!
+  claim: String!
+  feeAmount: BigInt! # uint256
+  recipient: Bytes! # address
+  verifiers: [Verifier!]! @derivedFrom(field: "claim")
+  nft: NFT @derivedFrom(field: "claim")
+}
+
+type Verifier @entity {
+    id: String!
+    address: Bytes!
+    revocable: Boolean!
+    claim: VerifiedClaim!
+}
+
+
+type ClaimContract @entity {
+    id: String!
+    VESTING_PERIOD: BigInt!
+    CLAIMABLE_PERIOD: BigInt!
+    POINTS_TO_ECOX_RATIO: BigInt!
+    initialInflationMultiplier: BigInt!
+    trustedVerifier: Bytes!
+    pointsMerkleRoot: Bytes!
+    vestedMultiples: [BigInt!]!
+    vestingDivider: BigInt!
+    pointsMultiplier: BigInt!
+    claimingEndsAt: BigInt!
+    claims: [Claim!]! @derivedFrom(field: "claimContract")
+    releases: [Release!]! @derivedFrom(field: "claimContract")
+    globals: Globals! @derivedFrom(field: "ecoClaim")
+}
+
+type Claim @entity {
+    id: String! # socialID
+    recipient: Bytes!
+    amountEco: BigInt!
+    amountEcox: BigInt!
+    points: BigInt!
+    claimTime: BigInt!
+    claimContract: ClaimContract!
+}
+
+type Release @entity {
+    id: String!
+    recipient: Bytes!
+    gasPayer: Bytes!
+    amountEco: BigInt!
+    amountEcox: BigInt!
+    feeAmount: BigInt!
+    claimContract: ClaimContract!
 }
