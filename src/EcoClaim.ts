@@ -7,7 +7,7 @@ import {
 } from "../generated/EcoClaim/EcoClaim"
 
 import {
-    Claim,
+    TokenClaim,
     Globals,
     ClaimContract,
     Release
@@ -45,7 +45,8 @@ export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
 }
 
 export function handleClaim(event: ClaimEvent): void {
-    const claim = new Claim(event.params.socialID.toString());
+    const claim = new TokenClaim(event.params.socialID);
+    claim.verifiedClaim = event.params.socialID;
     claim.recipient = event.params.addr;
     claim.amountEco =  event.params.eco;
     claim.amountEcox = event.params.ecox;

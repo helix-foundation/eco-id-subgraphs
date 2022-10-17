@@ -33,6 +33,7 @@ type VerifiedClaim @entity {
   claim: String!
   feeAmount: BigInt! # uint256
   recipient: Bytes! # address
+  tokenClaim: TokenClaim @derivedFrom(field: "verifiedClaim")
   verifiers: [Verifier!]! @derivedFrom(field: "claim")
   nft: NFT @derivedFrom(field: "claim")
 }
@@ -57,17 +58,18 @@ type ClaimContract @entity {
     vestingDivider: BigInt!
     pointsMultiplier: BigInt!
     claimingEndsAt: BigInt!
-    claims: [Claim!]! @derivedFrom(field: "claimContract")
+    tokenClaims: [TokenClaim!]! @derivedFrom(field: "claimContract")
     releases: [Release!]! @derivedFrom(field: "claimContract")
     globals: Globals! @derivedFrom(field: "ecoClaim")
 }
 
-type Claim @entity {
+type TokenClaim @entity {
     id: String! # socialID
     recipient: Bytes!
     amountEco: BigInt!
     amountEcox: BigInt!
     points: BigInt!
+    verifiedClaim: VerifiedClaim!
     claimTime: BigInt!
     claimContract: ClaimContract!
 }
