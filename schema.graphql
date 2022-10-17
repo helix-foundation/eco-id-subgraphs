@@ -5,6 +5,7 @@ type Globals @entity {
     ecoClaim: ClaimContract!
     eco: Bytes!
     ecox: Bytes!
+    currentInflationMultiplier: BigInt!
 }
 
 

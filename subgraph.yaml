@@ -21,6 +21,8 @@ dataSources:
       abis:
         - name: EcoClaim
           file: ./abis/EcoClaim.json
+        - name: ECO
+          file: ./abis/ECO.json
       eventHandlers:
         - event: InitializeEcoClaim()
           handler: handleInitializeEcoClaim
@@ -57,3 +59,22 @@ dataSources:
         - event: UnregisterClaim(string,indexed address,indexed address)
           handler: handleUnregisterClaim
       file: ./src/EcoNFT.ts
+templates:
+  - kind: ethereum
+    name: ECO
+    network: goerli
+    source:
+      abi: ECO
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Globals
+      abis:
+        - name: ECO
+          file: ./abis/ECO.json
+      eventHandlers:
+        - event: NewInflationMultiplier(uint256)
+          handler: handleNewInflationMultiplier
+      file: ./src/ECO.ts

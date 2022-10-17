@@ -6,6 +6,8 @@ import {
   ReleaseVesting
 } from "../generated/EcoClaim/EcoClaim"
 
+import { ECO as EcoTemplate } from "../generated/templates";
+
 import {
     TokenClaim,
     Globals,
@@ -41,7 +43,10 @@ export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
     globals.ecoNFT = claimContract._ecoNft().toHexString();
     globals.eco = claimContract._eco();
     globals.ecox = claimContract._ecoX();
+    globals.currentInflationMultiplier = ecoClaim.initialInflationMultiplier;
     globals.save();
+
+    EcoTemplate.create(claimContract._eco());
 }
 
 export function handleClaim(event: ClaimEvent): void {
