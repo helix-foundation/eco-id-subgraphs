@@ -25,9 +25,9 @@ export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
     ecoClaim.claimingEndsAt = claimContract._claimableEndTime();
     ecoClaim.initialInflationMultiplier = claimContract._initialInflationMultiplier();
     ecoClaim.pointsMerkleRoot = claimContract._pointsMerkleRoot();
-    ecoClaim.pointsMultiplier = claimContract._pointsMultiplier();
+    ecoClaim.POINTS_MULTIPLIER = claimContract.POINTS_MULTIPLIER();
     ecoClaim.trustedVerifier = claimContract._trustedVerifier();
-    ecoClaim.vestingDivider = claimContract._vestingDivider();
+    ecoClaim.VESTING_DIVIDER = claimContract.VESTING_DIVIDER();
 
     let multiples: BigInt[] = [];
     multiples.push(claimContract._vestedMultiples(BigInt.fromString("0")));
@@ -57,9 +57,9 @@ export function handleClaim(event: ClaimEvent): void {
     claim.amountEcox = event.params.ecox;
 
     const claimContract = EcoClaim.bind(event.address);
-    const claimBalance = claimContract._claimBalances(event.params.addr);
-    claim.points = claimBalance.value0; // points
-    claim.claimTime = claimBalance.value1; // claimtime
+    const claimBalance = claimContract._claimBalances(event.params.socialID);
+    claim.points = claimBalance.value1; // points
+    claim.claimTime = claimBalance.value2; // claimtime
     claim.claimContract = event.params.addr.toHexString();
 
     claim.save();
