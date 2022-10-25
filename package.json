@@ -5,10 +5,10 @@
     "codegen": "graph codegen",
     "network": "node scripts/setupNetwork.js :",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ paged1/claim",
+    "deploy": "graph deploy --product hosted-service ecographs/points-migration-graphs",
     "create-local": "graph create --node http://localhost:8020/ paged1/claim",
     "remove-local": "graph remove --node http://localhost:8020/ paged1/claim",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 paged1/claim"
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ecographs/points-migration-graphs"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.34.0",
