@@ -1,22 +1,32 @@
 {
   "mainnet": {
     "EcoClaim": {
-      "address": "",
-      "startBlock": 0
+      "address": "0xea2a1f659ac2dca0f8469b13cde1780c1d7751da",
+      "startBlock": 15835015
     },
     "EcoNFT": {
-      "address": "",
-      "startBlock": 0
+      "address": "0x96B648bD043CF845645eEa74E6C2eB1EB4c3B80e",
+      "startBlock": 15835015
     }
   },
   "goerli": {
     "EcoClaim": {
-      "address": "0x247a0BC8727196eE1098346bf797AEcD1c2e1f38",
-      "startBlock": 7833555
+      "address": "0xc203e40bC337aF3e725dF13bD536ab5b23f96ed2",
+      "startBlock": 7803830
     },
     "EcoNFT": {
-      "address": "0x30fdc4C279C83929c91dFb91623A97A5D2389D23",
-      "startBlock": 7833555
+      "address": "0x9bf5Ea5B366556a3A8AC6D73d61050293D8E52fE",
+      "startBlock": 7803830
+    }
+  },
+  "localhost": {
+    "EcoClaim": {
+      "address": "",
+      "startBlock": 0
+    },
+    "EcoNFT": {
+      "address": "",
+      "startBlock": 0
     }
   }
 }
