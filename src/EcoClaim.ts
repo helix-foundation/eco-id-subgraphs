@@ -40,7 +40,7 @@ export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
 
     const globals = new Globals("0");
     globals.ecoClaim = ecoClaim.id;
-    globals.ecoNFT = claimContract._ecoNft().toHexString();
+    globals.ecoID = claimContract._ecoID().toHexString();
     globals.eco = claimContract._eco();
     globals.ecox = claimContract._ecoX();
     globals.currentInflationMultiplier = ecoClaim.initialInflationMultiplier;

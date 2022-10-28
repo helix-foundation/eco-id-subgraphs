@@ -1,7 +1,7 @@
 
 type Globals @entity {
     id: String!
-    ecoNFT: NFTContract!
+    ecoID: NFTContract!
     ecoClaim: ClaimContract!
     eco: Bytes!
     ecox: Bytes!
@@ -17,7 +17,7 @@ type NFTContract @entity {
     name: String!
     symbol: String!
     nfts: [NFT!]! @derivedFrom(field: "nftContract")
-    globals: Globals! @derivedFrom(field: "ecoNFT")
+    globals: Globals! @derivedFrom(field: "ecoID")
 }
 
 type NFT @entity {

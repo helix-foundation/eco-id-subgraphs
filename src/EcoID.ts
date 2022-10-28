@@ -1,12 +1,12 @@
 import { BigInt, store } from "@graphprotocol/graph-ts";
 import {
-  EcoNFT,
-  InitializeEcoNFT,
+  EcoID,
+  InitializeEcoID,
   Mint as MintEvent,
   RegisterClaim as RegisterClaimEvent,
   Transfer as TransferEvent,
   UnregisterClaim as UnregisterClaimEvent
-} from "../generated/EcoNFT/EcoNFT"
+} from "../generated/EcoID/EcoID"
 import {
     NFT,
     NFTContract,
@@ -15,22 +15,22 @@ import {
 } from "../generated/schema"
 
 
-export function handleInitializeEcoNFT(event: InitializeEcoNFT): void {
-    const ecoNFT = new NFTContract(event.address.toHexString());
+export function handleInitializeEcoID(event: InitializeEcoID): void {
+    const ecoID = new NFTContract(event.address.toHexString());
 
-    const nftContract = EcoNFT.bind(event.address);
+    const nftContract = EcoID.bind(event.address);
 
-    ecoNFT.META_LIMIT = nftContract.META_LIMIT();
-    ecoNFT.NFT_IMAGE_URL = nftContract.NFT_IMAGE_URL();
-    ecoNFT.EXTERNAL_IMAGE_URL = nftContract.NFT_EXTERNAL_URL();
-    ecoNFT.name = nftContract.name();
-    ecoNFT.symbol = nftContract.symbol();
+    ecoID.META_LIMIT = nftContract.META_LIMIT();
+    ecoID.NFT_IMAGE_URL = nftContract.NFT_IMAGE_URL();
+    ecoID.EXTERNAL_IMAGE_URL = nftContract.NFT_EXTERNAL_URL();
+    ecoID.name = nftContract.name();
+    ecoID.symbol = nftContract.symbol();
 
-    ecoNFT.save();
+    ecoID.save();
 }
 
 export function handleMint(event: MintEvent): void {
-    const nftContract = EcoNFT.bind(event.address);
+    const nftContract = EcoID.bind(event.address);
     const tokenClaim = nftContract._tokenClaimIDs(event.params.tokenID);
 
     const nft = new NFT(event.params.tokenID.toString());
@@ -53,7 +53,7 @@ export function handleRegisterClaim(event: RegisterClaimEvent): void {
         const nft = NFT.load(verifiedClaim.nft!);
         // update nft tokenURI with new verifier (registrations that happen after mint)
         if (nft) {
-            const nftContract = EcoNFT.bind(event.address);
+            const nftContract = EcoID.bind(event.address);
             nft.tokenURI = nftContract.tokenURI(nft.tokenID);
             nft.save();
         }
@@ -84,7 +84,7 @@ export function handleUnregisterClaim(event: UnregisterClaimEvent): void {
             const nft = NFT.load(verifiedClaim.nft!);
             // update nft tokenURI without verifier
             if (nft) {
-                const nftContract = EcoNFT.bind(event.address);
+                const nftContract = EcoID.bind(event.address);
                 nft.tokenURI = nftContract.tokenURI(nft.tokenID);
                 nft.save();
             }
