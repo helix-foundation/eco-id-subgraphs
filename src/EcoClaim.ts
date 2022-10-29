@@ -34,6 +34,26 @@ export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
     multiples.push(claimContract._vestedMultiples(BigInt.fromString("1")));
     multiples.push(claimContract._vestedMultiples(BigInt.fromString("2")));
     multiples.push(claimContract._vestedMultiples(BigInt.fromString("3")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("4")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("5")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("6")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("7")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("8")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("9")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("10")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("11")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("12")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("13")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("14")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("15")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("16")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("17")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("18")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("19")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("20")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("21")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("22")));
+    multiples.push(claimContract._vestedMultiples(BigInt.fromString("23")));
     ecoClaim.vestedMultiples = multiples;
 
     ecoClaim.save();
