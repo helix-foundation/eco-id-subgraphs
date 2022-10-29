@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: EcoClaim
-    network: mainnet
+    network: goerli
     source:
-      address: "0xea2a1f659ac2dca0f8469b13cde1780c1d7751da"
+      address: "0x757D6300C879c26a9B5F60Ce647027F04cba6f22"
       abi: EcoClaim
-      startBlock: 15835015
+      startBlock: 7851625
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -33,11 +33,11 @@ dataSources:
       file: ./src/EcoClaim.ts
   - kind: ethereum
     name: EcoID
-    network: mainnet
+    network: goerli
     source:
-      address: "0x96B648bD043CF845645eEa74E6C2eB1EB4c3B80e"
+      address: "0xC3f57E570A2b2c49921A975840a72DD6aaC7d96b"
       abi: EcoID
-      startBlock: 15835015
+      startBlock: 7851625
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -62,7 +62,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: ECO
-    network: mainnet
+    network: goerli
     source:
       abi: ECO
     mapping:
