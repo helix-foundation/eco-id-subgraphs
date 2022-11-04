@@ -11,12 +11,12 @@
   },
   "goerli": {
     "EcoClaim": {
-      "address": "0x757D6300C879c26a9B5F60Ce647027F04cba6f22",
-      "startBlock": 7851625
+      "address": "0x348af5bFDAbcFAaC95e5E81fCFa366CD90d52b50",
+      "startBlock": 7892580
     },
     "EcoID": {
-      "address": "0xC3f57E570A2b2c49921A975840a72DD6aaC7d96b",
-      "startBlock": 7851625
+      "address": "0xfA40A2a6E9b98B4C3b78a3b1134D0A4D6FD989eC",
+      "startBlock": 7892580
     }
   },
   "localhost": {
