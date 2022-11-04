@@ -1,12 +1,12 @@
 {
   "mainnet": {
     "EcoClaim": {
-      "address": "0xea2a1f659ac2dca0f8469b13cde1780c1d7751da",
-      "startBlock": 15835015
+      "address": "0x25Fd6a0A10a43D54c2ed6B29542eAA2a21849DbF",
+      "startBlock": 15849840
     },
     "EcoID": {
-      "address": "0x96B648bD043CF845645eEa74E6C2eB1EB4c3B80e",
-      "startBlock": 15835015
+      "address": "0x5bc2Fa9426e882710d055C1A60F8cc93A31Edc58",
+      "startBlock": 15849840
     }
   },
   "goerli": {
