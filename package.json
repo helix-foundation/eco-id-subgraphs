@@ -1,14 +1,14 @@
 {
-  "name": "claim",
+  "name": "eco-id-subgraphs",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "network": "node scripts/setupNetwork.js :",
     "build": "graph build",
-    "deploy": "graph deploy --product hosted-service ecographs/points-migration-graphs",
-    "create-local": "graph create --node http://localhost:8020/ paged1/claim",
-    "remove-local": "graph remove --node http://localhost:8020/ paged1/claim",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ecographs/points-migration-graphs"
+    "deploy": "graph deploy --product hosted-service ecographs/eco-id-subgraphs",
+    "create-local": "graph create --node http://localhost:8020/ ecographs/eco-id-subgraphs",
+    "remove-local": "graph remove --node http://localhost:8020/ ecographs/eco-id-subgraphs",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ecographs/eco-id-subgraphs"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.34.0",
