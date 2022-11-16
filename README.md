@@ -3,6 +3,8 @@
 - [Entities](#entities)
 - [Mappings](#mappings)
 - [Production](#production)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Development
 
@@ -52,3 +54,9 @@ In order to deploy the subgraph to the hosted service, put new contract addresse
 copy the `startBlock` from the EcoID contract to the EcoClaim startBlock. Do not use a a startBlock of 0 as the subgraph will try to listen for events from the very beginning of the network.
 
 Once the `networks.json` file has the mainnet configuration, run `yarn network mainnet` and `graph deploy --product hosted-service <your account>/<your subgraph project>` to deploy the subgraph to the hosted service.
+
+## Contributing
+Contributions are welcome. Please submit any issues as issues on GitHub, and open a pull request with any contributions.
+
+## License
+[MIT (c) Helix Foundation](./LICENSE)

@@ -1,6 +1,6 @@
 {
   "name": "eco-id-subgraphs",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "codegen": "graph codegen",
     "network": "node scripts/setupNetwork.js :",
