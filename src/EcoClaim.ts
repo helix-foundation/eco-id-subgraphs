@@ -1,4 +1,4 @@
-import { BigInt } from "@graphprotocol/graph-ts"
+import { BigInt, log } from "@graphprotocol/graph-ts"
 import {
   EcoClaim,
   InitializeEcoClaim,
@@ -12,7 +12,7 @@ import {
     TokenClaim,
     Globals,
     ClaimContract,
-    Release
+    TokenRelease
 } from "../generated/schema"
 
 export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
@@ -86,14 +86,17 @@ export function handleClaim(event: ClaimEvent): void {
 }
 
 export function handleReleaseVesting(event: ReleaseVesting): void {
-    const release = new Release(event.transaction.hash.toHexString());
+    const tokens = event.transaction.input.toString().split(" ")
+    const socialID = tokens[tokens.length-1].replaceAll(" ", "").replaceAll("\n", "").replaceAll("\u001b", "");
 
+    const release = new TokenRelease(event.transaction.hash.toHexString());
+    release.verifiedClaim = socialID;
     release.recipient = event.params.addr;
     release.gasPayer = event.params.gasPayer;
     release.amountEco = event.params.ecoBalance;
     release.amountEcox = event.params.vestedEcoXBalance;
     release.feeAmount = event.params.feeAmount;
     release.claimContract = event.address.toHexString();
-
+    
     release.save();
 }

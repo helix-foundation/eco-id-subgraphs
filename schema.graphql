@@ -36,6 +36,7 @@ type VerifiedClaim @entity {
   recipient: Bytes! # address
   nonce: Int!
   tokenClaim: TokenClaim @derivedFrom(field: "verifiedClaim")
+  tokenRelease: TokenRelease @derivedFrom(field: "verifiedClaim")
   verifiers: [Verifier!]! @derivedFrom(field: "claim")
   nft: NFT @derivedFrom(field: "claim")
 }
@@ -61,7 +62,7 @@ type ClaimContract @entity {
     POINTS_MULTIPLIER: BigInt!
     claimingEndsAt: BigInt!
     tokenClaims: [TokenClaim!]! @derivedFrom(field: "claimContract")
-    releases: [Release!]! @derivedFrom(field: "claimContract")
+    tokenReleases: [TokenRelease!]! @derivedFrom(field: "claimContract")
     globals: Globals! @derivedFrom(field: "ecoClaim")
 }
 
@@ -76,12 +77,13 @@ type TokenClaim @entity {
     claimContract: ClaimContract!
 }
 
-type Release @entity {
+type TokenRelease @entity {
     id: String!
     recipient: Bytes!
     gasPayer: Bytes!
     amountEco: BigInt!
     amountEcox: BigInt!
     feeAmount: BigInt!
+    verifiedClaim: VerifiedClaim!
     claimContract: ClaimContract!
 }
