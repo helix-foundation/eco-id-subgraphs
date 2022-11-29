@@ -85,5 +85,6 @@ type TokenRelease @entity {
     amountEcox: BigInt!
     feeAmount: BigInt!
     verifiedClaim: VerifiedClaim!
+    claimTime: BigInt!
     claimContract: ClaimContract!
 }

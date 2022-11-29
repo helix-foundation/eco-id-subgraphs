@@ -86,8 +86,11 @@ export function handleClaim(event: ClaimEvent): void {
 }
 
 export function handleReleaseVesting(event: ReleaseVesting): void {
-    const tokens = event.transaction.input.toString().split(" ")
-    const socialID = tokens[tokens.length-1].replaceAll(" ", "").replaceAll("\n", "").replaceAll("\u001b", "");
+    let index = event.transaction.input.toString().indexOf("twitter");
+    if (index < 0) {
+        index = event.transaction.input.toString().indexOf("discord");
+    }
+    const socialID = event.transaction.input.toString().substring(index);
 
     const release = new TokenRelease(event.transaction.hash.toHexString());
     release.verifiedClaim = socialID;
@@ -96,6 +99,7 @@ export function handleReleaseVesting(event: ReleaseVesting): void {
     release.amountEco = event.params.ecoBalance;
     release.amountEcox = event.params.vestedEcoXBalance;
     release.feeAmount = event.params.feeAmount;
+    release.claimTime = event.block.timestamp;
     release.claimContract = event.address.toHexString();
     
     release.save();
