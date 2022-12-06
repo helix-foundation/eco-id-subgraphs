@@ -11,7 +11,7 @@
   },
   "goerli": {
     "EcoClaim": {
-      "address": "0x06bCccd679e3e4fF5B50491383fb461F9d0D23eA",
+      "address": "0x170C2d953bBBCbc302A29415CE0ffDfA9e80976f",
       "startBlock": 7892580
     },
     "EcoID": {
