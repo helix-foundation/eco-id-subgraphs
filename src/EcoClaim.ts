@@ -71,7 +71,7 @@ export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
 
 export function handleClaim(event: ClaimEvent): void {
     const claim = new TokenClaim(event.params.socialID);
-    claim.verifiedClaim = event.params.socialID;
+    claim.verifiedClaim = `${event.params.socialID}-${event.params.addr.toHexString()}`;
     claim.recipient = event.params.addr;
     claim.amountEco =  event.params.eco;
     claim.amountEcox = event.params.ecox;
@@ -93,7 +93,7 @@ export function handleReleaseVesting(event: ReleaseVesting): void {
     const socialID = event.transaction.input.toString().substring(index);
 
     const release = new TokenRelease(event.transaction.hash.toHexString());
-    release.verifiedClaim = socialID;
+    release.verifiedClaim = `${socialID}-${event.params.addr.toHexString()}`;
     release.recipient = event.params.addr;
     release.gasPayer = event.params.gasPayer;
     release.amountEco = event.params.ecoBalance;

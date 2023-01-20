@@ -46,6 +46,7 @@ dataSources:
         - NFTContract
         - VerifiedClaim
         - Verifier
+        - Claim
       abis:
         - name: EcoID
           file: ./abis/EcoID.json

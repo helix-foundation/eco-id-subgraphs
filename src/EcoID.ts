@@ -11,6 +11,7 @@ import {
     NFT,
     NFTContract,
     VerifiedClaim,
+    Claim,
     Verifier
 } from "../generated/schema"
 
@@ -35,7 +36,7 @@ export function handleMint(event: MintEvent): void {
 
     const nft = new NFT(event.params.tokenID.toString());
 
-    nft.claim = tokenClaim.value1;
+    nft.verifiedClaim = `${tokenClaim.value1}-${tokenClaim.value0.toHexString()}`;
     nft.recipient = event.params.recipient;
     nft.tokenID = event.params.tokenID;
     nft.tokenURI = nftContract.tokenURI(event.params.tokenID);
@@ -44,10 +45,20 @@ export function handleMint(event: MintEvent): void {
 }
 
 export function handleRegisterClaim(event: RegisterClaimEvent): void {
-    let verifiedClaim = VerifiedClaim.load(event.params.claim);
+    const claimID = `${event.params.claim}-${event.params.recipient.toHexString()}`;
+
+    // load claim string and update nonce
+    let claim = Claim.load(event.params.claim);
+    if (!claim) {
+        claim = new Claim(event.params.claim);
+        claim.nonce = 0;
+    }
+    claim.nonce = claim.nonce + 1;
+    claim.save();
+
+    let verifiedClaim = VerifiedClaim.load(claimID);
     if (!verifiedClaim) {
-        verifiedClaim = new VerifiedClaim(event.params.claim);
-        verifiedClaim.nonce = 0;
+        verifiedClaim = new VerifiedClaim(claimID);
     }
     else if (verifiedClaim.nft) {
         const nft = NFT.load(verifiedClaim.nft!);
@@ -61,25 +72,26 @@ export function handleRegisterClaim(event: RegisterClaimEvent): void {
     verifiedClaim.feeAmount = event.params.feeAmount;
     verifiedClaim.recipient = event.params.recipient;
     verifiedClaim.claim = event.params.claim;
-    verifiedClaim.nonce = verifiedClaim.nonce + 1;
     verifiedClaim.save();
 
-    const verifier = new Verifier(`${event.params.claim}-${event.params.verifier.toHexString()}`);
+    const verifier = new Verifier(`${claimID}-${event.params.verifier.toHexString()}`);
     verifier.revocable = event.params.revocable;
     verifier.address = event.params.verifier;
-    verifier.claim = event.params.claim;
+    verifier.verifiedClaim = claimID;
     verifier.save();
-
 }
 
 export function handleUnregisterClaim(event: UnregisterClaimEvent): void {
-    store.remove("Verifier", `${event.params.claim}-${event.params.verifier.toHexString()}`);
-
-    const verifiedClaim = VerifiedClaim.load(event.params.claim);
+    const claimID = `${event.params.claim}-${event.params.recipient.toHexString()}`;
+    store.remove("Verifier", `${claimID}-${event.params.verifier.toHexString()}`);
+    const verifiedClaim = VerifiedClaim.load(claimID);
     if (verifiedClaim) {
-        verifiedClaim.nonce = verifiedClaim.nonce + 1;
-        verifiedClaim.save();
-
+        // update nonce for claim string
+        const claim = Claim.load(event.params.claim);
+        if (claim) {
+            claim.nonce = claim.nonce + 1;
+            claim.save();
+        }
         if (verifiedClaim.nft) {
             const nft = NFT.load(verifiedClaim.nft!);
             // update nft tokenURI without verifier

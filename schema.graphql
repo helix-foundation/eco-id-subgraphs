@@ -23,7 +23,7 @@ type NFTContract @entity {
 type NFT @entity {
   id: String!
   recipient: Bytes! # address
-  claim: VerifiedClaim! # string
+  verifiedClaim: VerifiedClaim! # string
   tokenID: BigInt! # uint256
   tokenURI: String!
   nftContract: NFTContract!
@@ -31,21 +31,26 @@ type NFT @entity {
 
 type VerifiedClaim @entity {
   id: String!
-  claim: String!
+  claim: Claim!
   feeAmount: BigInt! # uint256
   recipient: Bytes! # address
-  nonce: Int!
   tokenClaim: TokenClaim @derivedFrom(field: "verifiedClaim")
   tokenRelease: TokenRelease @derivedFrom(field: "verifiedClaim")
-  verifiers: [Verifier!]! @derivedFrom(field: "claim")
-  nft: NFT @derivedFrom(field: "claim")
+  verifiers: [Verifier!]! @derivedFrom(field: "verifiedClaim")
+  nft: NFT @derivedFrom(field: "verifiedClaim")
+}
+
+type Claim @entity {
+    id: String!
+    nonce: Int!
+    verifiedClaims: [VerifiedClaim!]! @derivedFrom(field: "claim")
 }
 
 type Verifier @entity {
     id: String!
     address: Bytes!
     revocable: Boolean!
-    claim: VerifiedClaim!
+    verifiedClaim: VerifiedClaim!
 }
 
 
