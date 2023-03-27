@@ -3,6 +3,7 @@ type Globals @entity {
     id: String!
     ecoID: NFTContract!
     ecoClaim: ClaimContract!
+    ecoSeason: SeasonContract!
     eco: Bytes!
     ecox: Bytes!
     currentInflationMultiplier: BigInt!
@@ -36,6 +37,7 @@ type VerifiedClaim @entity {
   recipient: Bytes! # address
   tokenClaim: TokenClaim @derivedFrom(field: "verifiedClaim")
   tokenRelease: TokenRelease @derivedFrom(field: "verifiedClaim")
+  seasonClaim: SeasonClaim @derivedFrom(field: "verifiedClaim")
   verifiers: [Verifier!]! @derivedFrom(field: "verifiedClaim")
   nft: NFT @derivedFrom(field: "verifiedClaim")
 }
@@ -92,4 +94,27 @@ type TokenRelease @entity {
     verifiedClaim: VerifiedClaim!
     claimTime: BigInt!
     claimContract: ClaimContract!
+}
+
+type SeasonContract @entity {
+    id: String!
+    CLAIM_DURATION: BigInt!
+    POINTS_TO_ECOX_RATIO: BigInt!
+    initialInflationMultiplier: BigInt!
+    trustedVerifier: Bytes!
+    pointsMerkleRoot: Bytes!
+    POINTS_MULTIPLIER: BigInt!
+    claimingEndsAt: BigInt!
+    claims: [SeasonClaim!]! @derivedFrom(field: "seasonContract")
+    globals: Globals! @derivedFrom(field: "ecoSeason")
+}
+
+type SeasonClaim @entity {
+    id: String! # socialID
+    recipient: Bytes!
+    amountEco: BigInt!
+    amountEcox: BigInt!
+    claimTime: BigInt!
+    verifiedClaim: VerifiedClaim!
+    seasonContract: SeasonContract!
 }
