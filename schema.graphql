@@ -99,7 +99,6 @@ type TokenRelease @entity {
 type SeasonContract @entity {
     id: String!
     CLAIM_DURATION: BigInt!
-    POINTS_TO_ECOX_RATIO: BigInt!
     initialInflationMultiplier: BigInt!
     trustedVerifier: Bytes!
     pointsMerkleRoot: Bytes!
@@ -113,7 +112,6 @@ type SeasonClaim @entity {
     id: String! # socialID
     recipient: Bytes!
     amountEco: BigInt!
-    amountEcox: BigInt!
     claimTime: BigInt!
     verifiedClaim: VerifiedClaim!
     seasonContract: SeasonContract!

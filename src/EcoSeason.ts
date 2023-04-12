@@ -14,7 +14,6 @@ export function handleInitializeEcoSeason(event: InitializeEcoClaim): void {
 
     const ecoSeason = new SeasonContract(event.address.toHexString());
     ecoSeason.CLAIM_DURATION = seasonContract.CLAIM_DURATION();
-    ecoSeason.POINTS_TO_ECOX_RATIO = seasonContract.POINTS_TO_ECOX_RATIO();
     ecoSeason.claimingEndsAt = seasonContract._claimPeriodEnd();
     ecoSeason.initialInflationMultiplier = seasonContract._initialInflationMultiplier();
     ecoSeason.pointsMerkleRoot = seasonContract._pointsMerkleRoot();
@@ -35,7 +34,6 @@ export function handleClaim(event: ClaimEvent): void {
     claim.verifiedClaim = `${event.params.socialID}-${event.params.addr.toHexString()}`;
     claim.recipient = event.params.addr;
     claim.amountEco =  event.params.eco;
-    claim.amountEcox = event.params.ecox;
     claim.claimTime = event.block.timestamp;
 
     claim.seasonContract = event.params.addr.toHexString();
