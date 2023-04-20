@@ -11,7 +11,8 @@
 Running the subgraph in development is a task on it's own, in order to run the subgraph in conjunction with the [local ganache chain](https://github.com/helix-foundation/currency), you must first start the blockchain, then deploy and fetch the following addresses:
 
 - [EcoID](https://github.com/helix-foundation/eco-id)
-- [EcoClaim](https://github.com/helix-foundation/eco-claim)
+- [EcoClaim](https://github.com/helix-foundation/eco-claim/releases/tag/v1.0.0)
+- [EcoSeason](https://github.com/helix-foundation/eco-claim/releases/tag/v2.0.0)
 
 Once you have the addresses, paste them into [networks.json](./networks.json) under 'localhost', then run `yarn network` to sync the `subgraph.yaml` file.
 
