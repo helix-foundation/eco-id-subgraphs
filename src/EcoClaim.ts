@@ -1,4 +1,4 @@
-import { BigInt, log } from "@graphprotocol/graph-ts"
+import { BigInt, Address, log } from "@graphprotocol/graph-ts"
 import {
   EcoClaim,
   InitializeEcoClaim,
@@ -59,6 +59,7 @@ export function handleInitializeEcoClaim(event: InitializeEcoClaim): void {
     ecoClaim.save();
 
     const globals = new Globals("0");
+    globals.ecoSeason = Address.zero().toHexString();
     globals.ecoClaim = ecoClaim.id;
     globals.ecoID = claimContract._ecoID().toHexString();
     globals.eco = claimContract._eco();

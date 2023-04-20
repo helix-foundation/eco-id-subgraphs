@@ -7,6 +7,10 @@
     "EcoID": {
       "address": "0x5bc2Fa9426e882710d055C1A60F8cc93A31Edc58",
       "startBlock": 15849840
+    },
+    "EcoSeason": {
+        "address": "0x4625A2487fA76FB2B8E4EA374267176625CF78d3",
+        "startBlock": 17082535
     }
   },
   "goerli": {
@@ -17,6 +21,10 @@
     "EcoID": {
       "address": "0xfA40A2a6E9b98B4C3b78a3b1134D0A4D6FD989eC",
       "startBlock": 7892580
+    },
+    "EcoSeason": {
+        "address": "0x4ce227d466fc342ff6828d2fb83a2d9eebd8bb84",
+        "startBlock": 8740350
     }
   },
   "localhost": {
@@ -27,6 +35,10 @@
     "EcoID": {
       "address": "",
       "startBlock": 0
+    },
+    "EcoSeason": {
+        "address": "",
+        "startBlock": 0
     }
   }
 }

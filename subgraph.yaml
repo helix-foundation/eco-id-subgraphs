@@ -16,8 +16,8 @@ dataSources:
       entities:
         - Globals
         - ClaimContract
-        - Claim
-        - Release
+        - TokenClaim
+        - TokenRelease
       abis:
         - name: EcoClaim
           file: ./abis/EcoClaim.json
@@ -60,6 +60,32 @@ dataSources:
         - event: UnregisterClaim(string,indexed address,indexed address)
           handler: handleUnregisterClaim
       file: ./src/EcoID.ts
+  - kind: ethereum
+    name: EcoSeason
+    network: mainnet
+    source:
+      address: "0x4625A2487fA76FB2B8E4EA374267176625CF78d3"
+      abi: EcoSeason
+      startBlock: 17082537
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Globals
+        - SeasonContract
+        - EcoSeason
+      abis:
+        - name: EcoSeason
+          file: ./abis/EcoSeason.json
+        - name: ECO
+          file: ./abis/ECO.json
+      eventHandlers:
+        - event: InitializeEcoClaim()
+          handler: handleInitializeEcoSeason
+        - event: Claim(string,indexed address,uint256)
+          handler: handleClaim
+      file: ./src/EcoSeason.ts
 templates:
   - kind: ethereum
     name: ECO
