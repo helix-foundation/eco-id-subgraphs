@@ -64,9 +64,9 @@ dataSources:
     name: EcoSeason
     network: mainnet
     source:
-      address: "0x4625A2487fA76FB2B8E4EA374267176625CF78d3"
+      address: "0xD0df942D0E0509C67DcC3c9A72C5E3211Ad84acf"
       abi: EcoSeason
-      startBlock: 17082537
+      startBlock: 17117650
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
